@@ -1,19 +1,23 @@
 import time
 from datetime import datetime, timedelta
+import logs
 import os
+
+logger= logs.setup_logging(log_file="logs.log", path=os.path.join(os.path.expanduser("~/Documents"), "ThreatHuntOutputDev"))
 
 def get_timestamp():
     end_time = datetime.now()
     end_str = end_time.strftime("%Y-%m-%d %H:%M:%S")
-    last_run = os.path.join(os.path.expanduser("~/Documents"), "ThreatHuntOutput", "last_run.txt")
+    last_run = os.path.join(os.path.expanduser("~/Documents"), "ThreatHuntOutputDev", "last_run.txt")
     with open(last_run, "r", encoding="utf-8") as f:
         line = f.readline().strip()
         last_run_time = datetime.strptime(line, "%Y-%m-%d %H:%M:%S.%f")
     with open(last_run, "w", encoding="utf-8") as f: f.write(f"{end_time}")
     start_str = last_run_time.strftime("%Y-%m-%d %H:%M:%S")
+    logger.info(f"Threat hunt coverage: {start_str} - {end_str}")
     return start_str, end_str
 
-def parameters(start, end):
+def parameters_fortiedr(start, end):
     payload = [
                 {
                     "rule": "Access to Critical System Information",
