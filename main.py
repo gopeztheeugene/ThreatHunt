@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 import os
 
 #Load output directories
-target_dir = os.path.join(os.path.expanduser("~/Documents"), "ThreatHuntOutputDev")
+target_dir = os.path.join(os.path.expanduser("~/Documents"), "ThreatHuntOutput")
 target_dir_fortiedr = os.path.join(target_dir, "FortiEDR")
 target_dir_sentinelone = os.path.join(target_dir, "SentinelOne")
 os.makedirs(target_dir, exist_ok=True)
@@ -29,11 +29,6 @@ root = tk.Tk()
 root.withdraw()
 root.grab_set()
 root.attributes("-topmost", True)
-
-#SentinelOne Urls
-url_us = "https://xdr.us1.sentinelone.net/api/query"
-url_eu = "https://xdr.eu1.sentinelone.net/api/query"
-url_ca = "https://xdr.ca1.sentinelone.net/api/query"
 
 #FortiEDR Events to CSV
 def write_csv_fortiedr(data):
